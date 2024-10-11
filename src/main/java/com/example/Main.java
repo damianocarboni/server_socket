@@ -15,12 +15,16 @@ public class Main {
         System.out.println("un client si è collegato");
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
+        String stringaRicevuta = "";
+        while (true) {
+            stringaRicevuta = in.readLine();
+            if (stringaRicevuta.equals("!"))
+                break;
+            System.out.println("La stringa ricevuta: " + stringaRicevuta);
 
-        String stringaRicevuta = in.readLine();
-        System.out.println("La stringa ricevuta: " + stringaRicevuta);
-
-        String stringaMaiuscola = stringaRicevuta.toUpperCase();
-        out.writeBytes(stringaMaiuscola + "\n");
+            String stringaMaiuscola = stringaRicevuta.toUpperCase();
+            out.writeBytes(stringaMaiuscola + "\n");
+        }
 
         s.close();
         s1.close();
